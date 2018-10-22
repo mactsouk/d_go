@@ -7,8 +7,6 @@ agent:
 
 blocks:
   - name: Push Nginx image
-    dependencies:
-        - Nginx
     task:
       jobs:
       - name: Docker Hub
