@@ -1,0 +1,26 @@
+version: v1.0
+name: Creating Docker images
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Push Nginx image
+    dependencies:
+        - Nginx
+    task:
+      jobs:
+      - name: Docker Hub
+        commands:
+          - checkout
+          - docker build -t go_hw:v1 .
+          - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+          - docker tag go_hw:v1 "$DOCKER_USERNAME"/semaphore
+          - docker push "$DOCKER_USERNAME"/semaphore
+          - docker pull "$DOCKER_USERNAME"/semaphore
+          - docker images
+
+      secrets:
+      - name: docker-hub
+
