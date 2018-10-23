@@ -1,24 +1,18 @@
 version: v1.0
-name: Creating Docker images
+name: Using public Docker image
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 
 blocks:
-  - name: Push Nginx image
+  - name: Pull Nginx image
     task:
       jobs:
       - name: Docker Hub
         commands:
           - checkout
-          - docker build -t go_hw:v1 .
-          - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-          - docker tag go_hw:v1 "$DOCKER_USERNAME"/semaphore
-          - docker push "$DOCKER_USERNAME"/semaphore
-          - docker pull "$DOCKER_USERNAME"/semaphore
+          - docker run -d -p 1234:80 nginx:alpine
+          - wget http://localhost:1234
           - docker images
-
-      secrets:
-      - name: docker-hub
 
