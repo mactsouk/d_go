@@ -12,11 +12,11 @@ blocks:
       - name: Docker Hub
         commands:
           - checkout
-          - docker build -t go_hw:v1 .
           - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-          - docker tag go_hw:v1 "$DOCKER_USERNAME"/semaphore
-          - docker push "$DOCKER_USERNAME"/semaphore
-          - docker pull "$DOCKER_USERNAME"/semaphore
+          - docker build -t go_hw:v1 .
+          - docker tag go_hw:v1 "$DOCKER_USERNAME"/go_hw:v1
+          - docker push "$DOCKER_USERNAME"/go_hw:v1
+          - docker pull "$DOCKER_USERNAME"/go_hw:v1
           - docker images
 
       secrets:
