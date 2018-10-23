@@ -12,7 +12,7 @@ blocks:
       - name: DOCKER_COMPOSE_VERSION
         value: 1.14.2
       jobs:
-      - name: Delete + Download docker-compose
+      - name: Get docker-compose
         commands:
           - checkout
           - docker-compose -v
