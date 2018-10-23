@@ -9,8 +9,8 @@ blocks:
   - name: Install desired version of docker-compose
     task:
       env_vars:
-        - name: DOCKER_COMPOSE_VERSION
-          value: 1.14.2
+      - name: DOCKER_COMPOSE_VERSION
+        value: 1.14.2
       jobs:
       - name: Delete + Download docker-compose
         commands:
