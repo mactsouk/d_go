@@ -10,7 +10,7 @@ blocks:
     task:
       env_vars:
       - name: DOCKER_COMPOSE_VERSION
-        value: 1.14.2
+        value: 1.4.2
       jobs:
       - name: Get docker-compose
         commands:
