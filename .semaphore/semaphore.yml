@@ -19,6 +19,14 @@ blocks:
           - docker pull "$DOCKER_USERNAME"/"$SEMAPHORE_PIPELINE_ID"
           - docker images
 
+      - name: Update docker utility
+        commands:
+          - checkout
+          - docker --version
+          - sudo apt-get update
+          - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+          - docker --version
+
       secrets:
       - name: docker-hub
 
