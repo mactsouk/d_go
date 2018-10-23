@@ -1,22 +1,17 @@
 version: v1.0
-name: Using a private Docker image
+name: Building Docker images
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 
 blocks:
-  - name: Push Nginx image
+  - name: Build Go executable
     task:
       jobs:
       - name: Docker Hub
         commands:
           - checkout
-          - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-          - docker pull "$DOCKER_USERNAME"/semaphore
-          - docker images
-          - docker run "$DOCKER_USERNAME"/semaphore
-
-      secrets:
-      - name: docker-hub
+          - docker build -t go_hw:v1 .
+		  - docker run go_hw:v1
 
