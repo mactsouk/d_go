@@ -14,9 +14,9 @@ blocks:
           - checkout
           - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
           - docker build -t go_hw:v1 .
-          - docker tag go_hw:v1 "$DOCKER_USERNAME"/"$SEMAPHORE_PIPELINE_ID"
-          - docker push "$DOCKER_USERNAME"/"$SEMAPHORE_PIPELINE_ID"
-          - docker pull "$DOCKER_USERNAME"/"$SEMAPHORE_PIPELINE_ID"
+          - docker tag go_hw:v1 "$DOCKER_USERNAME"/"$SEMAPHORE_WORKFLOW_ID"
+          - docker push "$DOCKER_USERNAME"/"$SEMAPHORE_WORKFLOW_ID"
+          - docker pull "$DOCKER_USERNAME"/"$SEMAPHORE_WORKFLOW_ID"
           - docker images
 
       - name: Update docker utility
