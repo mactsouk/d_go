@@ -12,7 +12,7 @@ blocks:
       - name: Docker Hub
         commands:
           - checkout
-          - echo $DOCKER_PASSWORD | docker login "$DOCKER_USERNAME" --password-stdin
+          - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
           - docker build -t go_hw:v1 .
           - docker tag go_hw:v1 "$DOCKER_USERNAME"/"$SEMAPHORE_WORKFLOW_ID"
           - docker push "$DOCKER_USERNAME"/"$SEMAPHORE_WORKFLOW_ID"
