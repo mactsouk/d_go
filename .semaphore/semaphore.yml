@@ -13,5 +13,5 @@ blocks:
         commands:
           - checkout
           - docker build -t go_hw:v1 .
-		  - docker run go_hw:v1
+          - docker run go_hw:v1
 
