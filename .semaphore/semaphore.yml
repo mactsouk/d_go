@@ -15,6 +15,7 @@ blocks:
           - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
           - docker pull "$DOCKER_USERNAME"/semaphore
           - docker images
+          - docker run "$DOCKER_USERNAME"/semaphore
 
       secrets:
       - name: docker-hub
