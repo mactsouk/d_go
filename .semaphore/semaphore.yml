@@ -1,18 +1,21 @@
 version: v1.0
-name: Using public Docker image
+name: Using a private Docker image
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 
 blocks:
-  - name: Pull Nginx image
+  - name: Push Nginx image
     task:
       jobs:
       - name: Docker Hub
         commands:
           - checkout
-          - docker run -d -p 1234:80 nginx:alpine
-          - wget http://localhost:1234
+          - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+          - docker pull "$DOCKER_USERNAME"/semaphore
           - docker images
+
+      secrets:
+      - name: docker-hub
 
