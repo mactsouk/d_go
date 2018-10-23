@@ -1,24 +1,24 @@
 version: v1.0
-name: Install docker-compose
+name: Pushing a Docker image
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 
 blocks:
-  - name: Install desired version of docker-compose
+  - name: Push Docker image to Docker Hub
     task:
-      env_vars:
-      - name: DOCKER_COMPOSE_VERSION
-        value: 1.4.2
       jobs:
-      - name: Get docker-compose
+      - name: Docker Hub
         commands:
           - checkout
-          - docker-compose -v
-          - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-          - chmod +x docker-compose
-          - ./docker-compose -v
-          - sudo mv docker-compose /usr/bin
-          - docker-compose -v
+          - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+          - docker build -t go_hw:v1 .
+          - docker tag go_hw:v1 "$DOCKER_USERNAME"/"$SEMAPHORE_PIPELINE_ID"
+          - docker push "$DOCKER_USERNAME"/"$SEMAPHORE_PIPELINE_ID"
+          - docker pull "$DOCKER_USERNAME"/"$SEMAPHORE_PIPELINE_ID"
+          - docker images
+
+      secrets:
+      - name: docker-hub
 
